@@ -17,7 +17,8 @@ generate_products_component = components.create_component_from_func(
     name="taxonomy-products-generation",
     description="Generates products for each taxnonomy path",
 )
-def taxonomy_products_generation():
+def taxonomy_products_generation(n_products: int):
+
     vop = VolumeOp(
         name="create_volume",
         resource_name="data-volume",

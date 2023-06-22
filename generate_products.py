@@ -16,16 +16,15 @@ def generate_products(
         prompt = f"""
         Generate {product_amount} product names for the following path: '{taxonomy_path}' \
 
-        Do not repeat the product names.
-
-        Format the output as an array of strings, like for example["product1", "product2"]. \
-        Return an empty array like this [] in other scenarios
+         
+        Return the answer as a JSON object where each product name is an element of an array 
+        using "product_names" as key.
         """
 
         try:
             response = openai.ChatCompletion.create(
               model="gpt-3.5-turbo",
-              temperature= 0,
+              temperature= 0.0,
               messages=[
                     {"role": "user", "content": prompt},
                 ]
