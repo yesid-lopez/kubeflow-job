@@ -7,10 +7,11 @@ def generate_products(
 ):
     import openai
     import json
+    import os
     from openai.error import RateLimitError, APIError, ServiceUnavailableError
     from ast import literal_eval
 
-    openai.api_key = "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"
+    openai.api_key = os.getenv("OPENAI_KEY")
     def generate_products(taxonomy_path, product_amount):
         prompt = f"""
         Generate {product_amount} product names for the following path: \
@@ -53,4 +54,5 @@ def generate_products(
         json.dump(paths, fp)
 
     print("Product Generation has finished")
-    
+
+generate_products(2, "taxonomy.txt", "taxonomy.json")
