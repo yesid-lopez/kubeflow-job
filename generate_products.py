@@ -14,14 +14,12 @@ def generate_products(
     openai.api_key = os.getenv("OPENAI_KEY")
     def generate_products(taxonomy_path, product_amount):
         prompt = f"""
-        Generate {product_amount} product names for the following path: \
-
-        {taxonomy_path} \
+        Generate {product_amount} product names for the following path: '{taxonomy_path}' \
 
         Do not repeat the product names.
 
-        Format the output as an array of strings. Return an empty array \
-        in other scenarios
+        Format the output as an array of strings, like for example["product1", "product2"]. \
+        Return an empty array like this [] in other scenarios
         """
 
         try:
@@ -33,6 +31,7 @@ def generate_products(
                 ]
             )
             response = response["choices"][0]["message"]["content"]
+            print(response)
             return literal_eval(response)
         except (APIError, RateLimitError, ServiceUnavailableError) as api_error:
             print(f"An error has ocurred {type(api_error)}")
