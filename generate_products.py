@@ -20,7 +20,8 @@ def generate_products(
 
         Do not repeat the product names.
 
-        Format the output as an array of strings. 
+        Format the output as an array of strings. Return an empty array \
+        in other scenarios
         """
 
         try:
@@ -54,5 +55,3 @@ def generate_products(
         json.dump(paths, fp)
 
     print("Product Generation has finished")
-
-generate_products(2, "taxonomy.txt", "taxonomy.json")
