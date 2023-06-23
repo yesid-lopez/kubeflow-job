@@ -8,7 +8,7 @@ def generate_products(
     import openai
     import json
     import os
-    from openai.error import RateLimitError, APIError, ServiceUnavailableError
+    from openai.error import RateLimitError, APIError, ServiceUnavailableError, Timeout
     from ast import literal_eval
 
     openai.api_key = os.getenv("OPENAI_KEY")
@@ -32,7 +32,7 @@ def generate_products(
             response = response["choices"][0]["message"]["content"]
             print(response)
             return literal_eval(response)
-        except (APIError, RateLimitError, ServiceUnavailableError) as api_error:
+        except (APIError, RateLimitError, ServiceUnavailableError, Timeout) as api_error:
             print(f"An error has ocurred {type(api_error)}")
             print(api_error)
             return generate_products(taxonomy_path, product_amount)
